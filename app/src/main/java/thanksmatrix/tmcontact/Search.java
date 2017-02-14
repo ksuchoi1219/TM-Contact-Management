@@ -2,6 +2,7 @@ package thanksmatrix.tmcontact;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,7 +17,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Search extends AppCompatActivity implements View.OnClickListener {
+public class Search extends AppCompatActivity {
 
     private ConnectionClass connectionClass;
 
@@ -24,13 +25,13 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     private Button updateButton;
     private Button findButton;
 
-    private EditText userSKU;
-    private EditText userPname;
-    private EditText userStock;
-    private EditText userDescription;
-    private EditText userPrice;
+    private EditText fname;
+    private EditText lname;
+    private EditText company;
+    private EditText phone;
+    private EditText workPhone;
+    private EditText email;
 
-    private ProgressBar pbbar;
 
 
 
@@ -38,137 +39,38 @@ public class Search extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.update);
-        addListenerOnButton();
+        setContentView(R.layout.search);
 
         connectionClass = new ConnectionClass();
-        userPname = (EditText) findViewById(R.id.userItemName);
-        userStock = (EditText) findViewById(R.id.userQuantity);
-        userPrice = (EditText) findViewById(R.id.userPrice);
-        userDescription = (EditText) findViewById(R.id.userDescription);
+        fname = (EditText) findViewById(R.id.fnameValue);
+        lname = (EditText) findViewById(R.id.lnameValue);
+        company = (EditText) findViewById(R.id.companyValue);
+        phone = (EditText) findViewById(R.id.phoneValue);
+        workPhone = (EditText) findViewById(R.id.wPhoneValue);
+        email = (EditText) findViewById(R.id.emailValue);
+        SharedPreferences prefs = getSharedPreferences("MA", MODE_PRIVATE);
+        String username = prefs.getString("UN", "UNKNOWN");
 
-        pbbar = (ProgressBar) findViewById(R.id.pbbar);
-        pbbar.setVisibility(View.GONE);
-
-
-        scannerButton = (Button) findViewById(R.id.scanButton);
-        userSKU = (EditText) findViewById(R.id.userBarcode);
-        scannerButton.setOnClickListener(this);
-        updateButton = (Button) findViewById(R.id.updateButton);
-        findButton = (Button) findViewById(R.id.findButton);
-
-
-        findButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userBar = userSKU.getText().toString();
-                if (userBar.equals("")) {
-                    Toast.makeText(getBaseContext(), "Please enter barcode above!",  Toast.LENGTH_SHORT).show();
-
-                } else {
-                    Connection con = connectionClass.CONN();
-                    String query = "select brief, stock, price, description from dbo.products where pos_sku='" + userBar + "';";
-                    ResultSet rs;
-                    try {
-                        Statement stmt = con.createStatement();
-                        rs = stmt.executeQuery(query);
-                        while (rs.next()) {
-                            userPname.setText(rs.getString(1), TextView.BufferType.EDITABLE);
-                            userStock.setText(rs.getString(2), TextView.BufferType.EDITABLE);
-                            userPrice.setText(rs.getString(3), TextView.BufferType.EDITABLE);
-                            userDescription.setText(rs.getString(4), TextView.BufferType.EDITABLE);
-                        }
-                        con.close();
-
-                    } catch (Exception ex) {
-                        ex.getMessage();
-                    }
-                }
+        Connection con = connectionClass.CONN();
+        String query = "select email, company, Personf, Personl, phone1, phone2 from dbo.customers where Merchant='" + username + "';";
+        ResultSet rs;
+        try {
+            Statement stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                email.setText(rs.getString(1), TextView.BufferType.EDITABLE);
+                company.setText(rs.getString(2), TextView.BufferType.EDITABLE);
+                fname.setText(rs.getString(3), TextView.BufferType.EDITABLE);
+                lname.setText(rs.getString(4), TextView.BufferType.EDITABLE);
+                phone.setText(rs.getString(5), TextView.BufferType.EDITABLE);
+                workPhone.setText(rs.getString(6), TextView.BufferType.EDITABLE);
 
             }
-        });
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DoUpdate doUpdate = new DoUpdate();
-                doUpdate.execute("");
-            }
-        });
-
-    }
-
-    @Override
-    public void onClick(View view) {
-
-    }
-
-
-    public class DoUpdate extends AsyncTask<String,String,String> {
-        String z = "";
-        Boolean isSuccess = false;
-
-        String userBar = userSKU.getText().toString();
-        String newName = userPname.getText().toString();
-        String newStock = userStock.getText().toString();
-        String newDescription = userDescription.getText().toString();
-        String newPrice = userPrice.getText().toString();
-
-
-        @Override
-        protected void onPreExecute() {
-            pbbar.setVisibility(View.VISIBLE);
-        }
-
-        @Override
-        protected void onPostExecute(String r) {
-            pbbar.setVisibility(View.GONE);
-            Toast.makeText(Search.this,r, Toast.LENGTH_SHORT).show();
-
-            if(isSuccess) {
-                Intent i = new Intent(Search.this, Dashboard.class);
-                startActivity(i);
-                finish();
-            }
-        }
-        @Override
-        protected String doInBackground(String... params) {
-
-            if(userBar.trim().equals("")||newName.trim().equals("")||newStock.trim().equals("")||newDescription.trim().equals("")||newPrice.trim().equals(""))
-                z = "Please enter all required fields!";
-
-            else {
-                try {
-                    Connection con = connectionClass.CONN();
-                    if (con == null) {
-                        z = "Error in connection with SQL server!";
-                    } else {
-                        String query = "update dbo.products set brief = '"+newName+"', stock = '"+newStock+"', description = '"+newDescription+"', price= '"+newPrice+"' where pos_sku = '"+userBar+"';";
-                        Statement stmt = con.createStatement();
-                        z = "Updated successfully!";
-                        stmt.executeUpdate(query);
-                        isSuccess = true;
-                    }
-                }
-                catch (Exception ex) {
-                    isSuccess = false;
-                    z = ex.getMessage();
-                }
-            }
-            return z;
+            con.close();
+        } catch (Exception ex) {
+            ex.getMessage();
         }
     }
-    private void addListenerOnButton() {
-        final Context context = this;
-        updateButton = (Button) findViewById(R.id.updateButton);
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, Search.class);
-                    startActivity(intent);
-            }
-        });
-    }
-
 }
 
 

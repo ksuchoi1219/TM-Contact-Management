@@ -11,13 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import net.sourceforge.jtds.jdbc.DateTime;
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -43,7 +39,6 @@ public class Add extends AppCompatActivity implements OnClickListener {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm.SS");
         date = sdf.format(new Date());
-        Toast.makeText(getBaseContext(), date,  Toast.LENGTH_SHORT).show();
 
         connectionClass = new ConnectionClass();
         Intent intent = getIntent();
@@ -102,7 +97,6 @@ public class Add extends AppCompatActivity implements OnClickListener {
                 startActivity(i);
                 finish();
             }
-
         }
         @Override
         protected String doInBackground(String... params) {
@@ -182,8 +176,6 @@ public class Add extends AppCompatActivity implements OnClickListener {
                                 "NULL, NULL, NULL, NULL, NULL, " +
 
                                 "NULL, NULL, NULL, NULL, NULL);";
-
-
 
                         Statement stmt = con.createStatement();
                         z = "Imported successfully!";

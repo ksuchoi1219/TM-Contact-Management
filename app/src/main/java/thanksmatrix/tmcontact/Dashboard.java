@@ -59,7 +59,7 @@ public class Dashboard extends AppCompatActivity {
         updateButton = (Button)findViewById(R.id.updateButton);
         updateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), Update.class);
+                Intent myIntent = new Intent(view.getContext(), Search.class);
                 startActivityForResult(myIntent, 0);
             }
         });
