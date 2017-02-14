@@ -33,10 +33,9 @@
             android:name="android.support.PARENT_ACTIVITY"
             android:value="thanksmatrix.tmcontact.Dashboard" />
     </activity>
-    <activity android:name="thanksmatrix.tmcontact.Add"></activity>
-    <activity android:name="thanksmatrix.tmcontact.Update"></activity>
-    <activity android:name="thanksmatrix.tmcontact.Scan"></activity>
-    <activity android:name="thanksmatrix.tmcontact.OcrCaptureActivity"></activity>
+        <activity android:name="thanksmatrix.tmcontact.Add"></activity>
+        <activity android:name="thanksmatrix.tmcontact.Search"></activity>
+        <activity android:name="thanksmatrix.tmcontact.OcrCaptureActivity"></activity>
     </application>
 
 </manifest>

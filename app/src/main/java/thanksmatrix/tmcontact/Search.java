@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Update extends AppCompatActivity implements View.OnClickListener {
+public class Search extends AppCompatActivity implements View.OnClickListener {
 
     private ConnectionClass connectionClass;
 
@@ -122,10 +122,10 @@ public class Update extends AppCompatActivity implements View.OnClickListener {
         @Override
         protected void onPostExecute(String r) {
             pbbar.setVisibility(View.GONE);
-            Toast.makeText(Update.this,r, Toast.LENGTH_SHORT).show();
+            Toast.makeText(Search.this,r, Toast.LENGTH_SHORT).show();
 
             if(isSuccess) {
-                Intent i = new Intent(Update.this, Dashboard.class);
+                Intent i = new Intent(Search.this, Dashboard.class);
                 startActivity(i);
                 finish();
             }
@@ -163,7 +163,7 @@ public class Update extends AppCompatActivity implements View.OnClickListener {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, Update.class);
+                Intent intent = new Intent(context, Search.class);
                     startActivity(intent);
             }
         });

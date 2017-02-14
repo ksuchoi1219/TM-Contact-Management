@@ -7,16 +7,16 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <thanksmatrix.tm_contact_management.ui.camera.CameraSourcePreview
+    <thanksmatrix.tmcontact.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <thanksmatrix.tm_contact_management.ui.camera.GraphicOverlay
+        <thanksmatrix.tmcontact.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </thanksmatrix.tm_contact_management.ui.camera.CameraSourcePreview>
+    </thanksmatrix.tmcontact.CameraSourcePreview>
 
 </LinearLayout>

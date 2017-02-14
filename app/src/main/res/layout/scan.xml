@@ -68,8 +68,8 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android:padding="3dp"
-        android:onClick="Add"
-        android:id="@+id/addButton"
+        android:onClick="nextAdd"
+        android:id="@+id/nextButton"
         android:background="@drawable/smallb"
         android:layout_alignBottom="@+id/auto_focus"
         android:layout_alignParentEnd="true"
@@ -82,8 +82,8 @@
         android:padding="3dp"
         android:id="@+id/scanButton"
         android:background="@drawable/smallb"
-        android:layout_alignBaseline="@+id/addButton"
-        android:layout_alignBottom="@+id/addButton"
+        android:layout_alignBaseline="@+id/nextButton"
+        android:layout_alignBottom="@+id/nextButton"
         android:layout_centerHorizontal="true" />
 
 

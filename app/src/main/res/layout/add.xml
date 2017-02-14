@@ -157,25 +157,23 @@
         android:layout_marginLeft="180dp"/>
 
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/pbbar"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add"
         android:padding="3dp"
-        android:id="@+id/read_text"
+        android:id="@+id/addButton"
         android:background="@drawable/smallb"
-        android:layout_above="@+id/pbbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginTop="350dp"
+        android:layout_marginLeft="125dp"/>
 
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/pbbar"
+        android:layout_marginTop="56dp"
+        android:layout_alignTop="@+id/addButton"
+        android:layout_alignEnd="@+id/textInstruction" />
 
 
 </RelativeLayout>
