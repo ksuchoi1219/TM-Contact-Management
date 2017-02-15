@@ -4,26 +4,28 @@ package thanksmatrix.tmcontact;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.ContextMenu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public class Search extends AppCompatActivity {
 
     private ConnectionClass connectionClass;
 
 
-    private TextView fname;
-    private TextView lname;
-    private TextView company;
-    private TextView phone;
-    private TextView workPhone;
-    private TextView email;
-
+    private ListView list;
+    private ArrayList<String> names = new ArrayList<>();
 
 
 
@@ -32,36 +34,50 @@ public class Search extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
-
+        list = (ListView) findViewById(R.id.lV);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, names);
+        list.setAdapter(adapter);
+        registerForContextMenu(list);
         connectionClass = new ConnectionClass();
-        fname = (TextView) findViewById(R.id.fnameValue);
-        lname = (TextView) findViewById(R.id.lnameValue);
-        company = (TextView) findViewById(R.id.companyValue);
-        phone = (TextView) findViewById(R.id.phoneValue);
-        workPhone = (TextView) findViewById(R.id.wPhoneValue);
-        email = (TextView) findViewById(R.id.emailValue);
+
         SharedPreferences prefs = getSharedPreferences("MA", MODE_PRIVATE);
         String username = prefs.getString("UN", "UNKNOWN");
 
         Connection con = connectionClass.CONN();
-        String query = "select email, company, Personf, Personl, phone1, phone2 from dbo.customers where Merchant='" + username + "';";
+        String query = "select Personf, Personl from dbo.customers where Merchant='" + username + "';";
         ResultSet rs;
         try {
             Statement stmt = con.createStatement();
             rs = stmt.executeQuery(query);
             while (rs.next()) {
-                email.setText(rs.getString(1), TextView.BufferType.EDITABLE);
-                company.setText(rs.getString(2), TextView.BufferType.EDITABLE);
-                fname.setText(rs.getString(3), TextView.BufferType.EDITABLE);
-                lname.setText(rs.getString(4), TextView.BufferType.EDITABLE);
-                phone.setText(rs.getString(5), TextView.BufferType.EDITABLE);
-                workPhone.setText(rs.getString(6), TextView.BufferType.EDITABLE);
+                names.add(rs.getString(1) + " " + rs.getString(2));
 
             }
             con.close();
         } catch (Exception ex) {
             ex.getMessage();
         }
+
+    }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("Select The Action");
+        menu.add(0, v.getId(), 0, "Update");
+        menu.add(0, v.getId(), 0, "Delete");
+    }
+    @Override
+    public boolean onContextItemSelected(MenuItem item){
+        if(item.getTitle()=="Update"){
+            Toast.makeText(getApplicationContext(),"updating",Toast.LENGTH_LONG).show();
+        }
+        else if(item.getTitle()=="Delete"){
+            Toast.makeText(getApplicationContext(),"deleting",Toast.LENGTH_LONG).show();
+        }else{
+            return false;
+        }
+        return true;
     }
 }
 

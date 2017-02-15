@@ -79,7 +79,6 @@ public class Scan extends Activity implements View.OnClickListener {
 
                     }
 
-
                 } else {
                     Toast.makeText(getBaseContext(), "Text is not recognized.",  Toast.LENGTH_SHORT).show();
                 }
