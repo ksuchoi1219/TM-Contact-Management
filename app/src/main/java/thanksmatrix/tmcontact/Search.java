@@ -1,17 +1,12 @@
 package thanksmatrix.tmcontact;
 
-import android.content.Context;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.TextView;
+
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,16 +16,13 @@ public class Search extends AppCompatActivity {
 
     private ConnectionClass connectionClass;
 
-    private Button scannerButton;
-    private Button updateButton;
-    private Button findButton;
 
-    private EditText fname;
-    private EditText lname;
-    private EditText company;
-    private EditText phone;
-    private EditText workPhone;
-    private EditText email;
+    private TextView fname;
+    private TextView lname;
+    private TextView company;
+    private TextView phone;
+    private TextView workPhone;
+    private TextView email;
 
 
 
@@ -42,12 +34,12 @@ public class Search extends AppCompatActivity {
         setContentView(R.layout.search);
 
         connectionClass = new ConnectionClass();
-        fname = (EditText) findViewById(R.id.fnameValue);
-        lname = (EditText) findViewById(R.id.lnameValue);
-        company = (EditText) findViewById(R.id.companyValue);
-        phone = (EditText) findViewById(R.id.phoneValue);
-        workPhone = (EditText) findViewById(R.id.wPhoneValue);
-        email = (EditText) findViewById(R.id.emailValue);
+        fname = (TextView) findViewById(R.id.fnameValue);
+        lname = (TextView) findViewById(R.id.lnameValue);
+        company = (TextView) findViewById(R.id.companyValue);
+        phone = (TextView) findViewById(R.id.phoneValue);
+        workPhone = (TextView) findViewById(R.id.wPhoneValue);
+        email = (TextView) findViewById(R.id.emailValue);
         SharedPreferences prefs = getSharedPreferences("MA", MODE_PRIVATE);
         String username = prefs.getString("UN", "UNKNOWN");
 

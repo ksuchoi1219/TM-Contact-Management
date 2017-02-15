@@ -4,11 +4,12 @@ android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "thanksmatrix.tmtrucking"
+        applicationId "thanksmatrix.tm_contacts"
         minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
-        versionName "1.00"
+        versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,3 +32,6 @@ dependencies {
     compile 'com.android.support:design:24.2.0'
 
 }
+//pass ejhejh1205
+//ContactKey
+//Ejhejh1205%

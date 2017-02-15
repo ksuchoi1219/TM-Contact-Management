@@ -30,7 +30,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="10dp"/>
 
-    <EditText
+    <TextView
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:hint="First Name"
@@ -54,7 +54,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="35dp"/>
-    <EditText
+    <TextView
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:hint="Last Name"
@@ -78,7 +78,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="60dp"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Company Name"
@@ -103,7 +103,7 @@
         android:textColor="#000000"
         android:layout_marginTop="85dp"
         android:layout_alignParentStart="true" />
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/phoneValue"
@@ -128,7 +128,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="110dp"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wPhoneValue"
@@ -154,7 +154,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="135dp"/>
-    <EditText
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/emailValue"
