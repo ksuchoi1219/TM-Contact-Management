@@ -24,7 +24,8 @@ public class Add extends AppCompatActivity implements OnClickListener {
 
     private Button addButton;
     private String username ="";
-    private EditText name;
+    private EditText fName;
+    private EditText lName;
     private EditText company;
     private EditText phone;
     private EditText workPhone;
@@ -42,7 +43,8 @@ public class Add extends AppCompatActivity implements OnClickListener {
 
         connectionClass = new ConnectionClass();
         Intent intent = getIntent();
-        name = (EditText) findViewById(R.id.nameValue);
+        fName = (EditText) findViewById(R.id.nameFValue);
+        lName = (EditText) findViewById(R.id.nameLValue);
         company = (EditText) findViewById(R.id.companyValue);
         company.setText(intent.getStringExtra("company"));
         phone = (EditText) findViewById(R.id.phoneValue);
@@ -74,10 +76,8 @@ public class Add extends AppCompatActivity implements OnClickListener {
 
         SharedPreferences prefs = getSharedPreferences("MA", MODE_PRIVATE);
         String username = prefs.getString("UN", "UNKNOWN");
-        String uName = name.getText().toString();
-        String[] nameArray = uName.split("\\s+");
-        String fName = nameArray[0];
-        String lName = nameArray[1];
+        String uFName = fName.getText().toString();
+        String uLName = lName.getText().toString();
         String uCompany = company.getText().toString();
         String uPhone = phone.getText().toString();
         String uWPhone = workPhone.getText().toString();
@@ -101,7 +101,7 @@ public class Add extends AppCompatActivity implements OnClickListener {
         @Override
         protected String doInBackground(String... params) {
 
-            if(uName.trim().equals("") || uCompany.trim().equals("") || uWPhone.trim().equals(""))
+            if(uFName.trim().equals("") || uEmail.trim().equals("") || uPhone.trim().equals(""))
                 z = "Please enter all required fields!";
             else {
                 try {
@@ -147,8 +147,8 @@ public class Add extends AppCompatActivity implements OnClickListener {
                                 "(" +
                                 "'G', 'X', NULL, '" + username + "', 'Client', " +
                                 "'" + uEmail + "', NULL, 0.00, NULL, '" + uCompany + "', " +
-                                "NULL, NULL, NULL, NULL, '" + fName + "', " +
-                                "'" + lName + "', NULL, 0, '" + uPhone + "', '" + uWPhone + "', " +
+                                "NULL, NULL, NULL, NULL, '" + uFName + "', " +
+                                "'" + uLName + "', NULL, 0, '" + uPhone + "', '" + uWPhone + "', " +
                                 "NULL, NULL, NULL, NULL, NULL," +
 
                                 "NULL, NULL, NULL, NULL, NULL, " +
