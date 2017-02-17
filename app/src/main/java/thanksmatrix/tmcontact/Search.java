@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ContextMenu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +24,6 @@ public class Search extends AppCompatActivity {
 
     private ConnectionClass connectionClass;
     private ListView list;
-    private ListView list1;
     private ArrayList<String> names = new ArrayList<>();
     private String username = "";
     private String selectedContact;
@@ -88,7 +86,6 @@ public class Search extends AppCompatActivity {
             final String f = nameArray[0];
             final String l = nameArray[1];
             final String title = "Update";
-            final String message = "Update any information below to update";
             final String fNameHint = "First Name";
             final String lNameHint = "Last Name";
             final String emailHint = "Email";
@@ -99,7 +96,6 @@ public class Search extends AppCompatActivity {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
             alert.setTitle(title);
-            alert.setMessage(message);
 
             final EditText fName = new EditText(this);
             fName.setHint(fNameHint);

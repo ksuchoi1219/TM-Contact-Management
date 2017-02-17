@@ -20,11 +20,7 @@ public class Scan extends Activity implements View.OnClickListener {
 
     private String[] info;
     private String companyName;
-    private String phone;
 
-//    private String wPhone;
-//    private String email;
-//    private String name;
 
     private static final int RC_OCR_CAPTURE = 9003;
 
