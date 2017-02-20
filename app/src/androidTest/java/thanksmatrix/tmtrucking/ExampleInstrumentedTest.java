@@ -1,4 +1,4 @@
-package thanksmatrix.tmcontact;
+package thanksmatrix.tmtrucking;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

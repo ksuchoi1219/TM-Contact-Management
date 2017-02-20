@@ -1,4 +1,4 @@
-package thanksmatrix.tmcontact;
+package thanksmatrix.tmtrucking;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -1,4 +1,4 @@
-package thanksmatrix.tmcontact;
+package thanksmatrix.tmtrucking;
 
 import org.junit.Test;
 
