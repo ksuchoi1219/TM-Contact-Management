@@ -82,33 +82,38 @@ public class Search extends AppCompatActivity {
     public boolean onContextItemSelected(MenuItem item){
         if(item.getTitle()=="Update"){
 
-            final String [] nameArray = selectedContact.split(" ");
-            final String f = nameArray[0];
-            final String l = nameArray[1];
             final String title = "Update";
-            final String fNameHint = "First Name";
-            final String lNameHint = "Last Name";
-            final String emailHint = "Email";
-            final String companyHint = "Company";
-            final String phoneHint = "Phone";
-            final String wPhoneHint = "Work Phone";
+            final String [] nameArray = selectedContact.split(" ");
+            final String f = nameArray[0] + " " + nameArray[1];
+            final String l = nameArray[2] + " " + nameArray[3];
+            final EditText fName = new EditText(this);
+            final EditText lName = new EditText(this);
+            final EditText company = new EditText(this);
+            final EditText phone = new EditText(this);
+            final EditText wPhone = new EditText(this);
+            final EditText email = new EditText(this);
+
+            Connection con = connectionClass.CONN();
+            String query = "select Personf, Personl, email, company, phone1, phone2 from dbo.customers where Merchant='" + username + "' and Personf = '" + f + "' and Personl = '" + l + "';";
+            ResultSet rs;
+            try {
+                Statement stmt = con.createStatement();
+                rs = stmt.executeQuery(query);
+                while (rs.next()) {
+                    fName.setHint(rs.getString(1));
+                    lName.setHint(rs.getString(2));
+                    email.setHint(rs.getString(3));
+                    company.setHint(rs.getString(4));
+                    phone.setHint(rs.getString(5));
+                    wPhone.setHint(rs.getString(6));
+                }
+                con.close();
+            } catch (Exception ex) {
+                ex.getMessage();
+            }
 
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
             alert.setTitle(title);
-
-            final EditText fName = new EditText(this);
-            fName.setHint(fNameHint);
-            final EditText lName = new EditText(this);
-            lName.setHint(lNameHint);
-            final EditText company = new EditText(this);
-            company.setHint(companyHint);
-            final EditText phone = new EditText(this);
-            phone.setHint(phoneHint);
-            final EditText wPhone = new EditText(this);
-            wPhone.setHint(wPhoneHint);
-            final EditText email = new EditText(this);
-            email.setHint(emailHint);
 
             LinearLayout layout = new LinearLayout(getApplicationContext());
             layout.setOrientation(LinearLayout.VERTICAL);
@@ -129,6 +134,7 @@ public class Search extends AppCompatActivity {
                     String uPhone = phone.getText().toString();
                     String uWPhone = wPhone.getText().toString();
                     String uEmail = email.getText().toString();
+
                     try {
                         Connection con = connectionClass.CONN();
                         if (con == null) {
